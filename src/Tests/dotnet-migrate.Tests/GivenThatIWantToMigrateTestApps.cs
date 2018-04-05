@@ -20,8 +20,8 @@ using Microsoft.DotNet.Cli.Utils;
 namespace Microsoft.DotNet.Migration.Tests
 {
     public class GivenThatIWantToMigrateTestApps : TestBase
-    {
-        [Theory]
+    {        
+        [Theory(Skip = "https://github.com/dotnet/cli-migrate/issues/69")]
         [InlineData("TestAppWithRuntimeOptions")]
         [InlineData("TestAppWithContents")]
         [InlineData("AppWithAssemblyInfo")]
