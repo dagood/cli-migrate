@@ -184,7 +184,7 @@ function InstallDotNetSdk {
 }
 
 function GetDotNetInstallScript {
-  local $root=$1
+  local root=$1
   local install_script="$root/dotnet-install.sh"
 
   if [[ ! -a "$install_script" ]]; then
@@ -232,13 +232,18 @@ function InitializeToolset {
   fi
 
   toolset_build_proj=`cat $toolset_location_file`
+
+  if [[ ! -a "$toolset_build_proj" ]]; then
+    echo "Invalid toolset path: $toolset_build_proj"
+    ExitWithExitCode 3
+  fi
 }
 
 function InitializeCustomToolset {
-  local script="RestoreToolset.sh"
+  local script="$repo_root/build/RestoreToolset.sh"
 
   if [[ -a "$script" ]]; then
-    "$script"
+    . "$script"
   fi
 }
 

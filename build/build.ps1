@@ -70,7 +70,7 @@ function InitializeDotNetCli {
 
   # Source Build uses DotNetCoreSdkDir variable
   if ($env:DotNetCoreSdkDir -ne $null) {
-    $env:DOTNET_INSTALL_DIR = $env:DotNetCoreSdkDir    
+    $env:DOTNET_INSTALL_DIR = $env:DotNetCoreSdkDir
   }
 
   # Use dotnet installation specified in DOTNET_INSTALL_DIR if it contains the required SDK version, 
@@ -152,15 +152,15 @@ function InitializeToolset {
   $toolsetLocationFile = Join-Path $ToolsetDir "$toolsetVersion.txt"
 
   if (Test-Path $toolsetLocationFile) {
-    $path = Get-Content $toolsetLocationFile
+    $path = Get-Content $toolsetLocationFile -TotalCount 1
     if (Test-Path $path) {
       $global:ToolsetBuildProj = $path
       return
     }
   }
 
-  if (-not $restore) {
-    throw "Toolset version $toolsetVersion has not been restored."
+  if (!$restore) {
+    throw "Toolset has not been restored (version $toolsetVersion)."
   }
 
   $proj = Join-Path $ToolsetDir "restore.proj"  
@@ -172,7 +172,12 @@ function InitializeToolset {
     throw "Failed to restore toolset (exit code '$lastExitCode'). See log: $ToolsetRestoreLog"
   }
 
-  $global:ToolsetBuildProj = Get-Content $toolsetLocationFile
+  $path = Get-Content $toolsetLocationFile -TotalCount 1
+  if (!(Test-Path $path)) {
+    throw "Invalid toolset path: $path"
+  }
+
+  $global:ToolsetBuildProj = $path
 }
 
 function InitializeCustomToolset {

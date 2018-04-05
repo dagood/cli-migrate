@@ -28,5 +28,9 @@ function InitializeAdditionalSharedFrameworks {
   }
 }
 
-InitializeDotNetCli_ProjectJson
-InitializeAdditionalSharedFrameworks
+# The following frameworks and tools are used only for testing.
+# Do not attempt to install them in source build.
+if ($env:DotNetBuildFromSource -ne "true") {
+  InitializeDotNetCli_ProjectJson
+  InitializeAdditionalSharedFrameworks
+}
