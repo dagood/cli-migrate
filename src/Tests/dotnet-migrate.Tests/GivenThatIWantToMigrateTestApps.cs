@@ -21,7 +21,7 @@ namespace Microsoft.DotNet.Migration.Tests
 {
     public class GivenThatIWantToMigrateTestApps : TestBase
     {        
-        [Theory(Skip = "https://github.com/dotnet/cli-migrate/issues/69")]
+        [Theory]
         [InlineData("TestAppWithRuntimeOptions")]
         [InlineData("TestAppWithContents")]
         [InlineData("AppWithAssemblyInfo")]
