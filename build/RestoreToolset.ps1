@@ -31,4 +31,5 @@ function InstallDotNetSharedFramework([string]$dotnetRoot, [string]$version) {
 if ($env:DotNetBuildFromSource -ne "true") {
   InitializeDotNetCli_ProjectJson
   InstallDotNetSharedFramework $env:DOTNET_INSTALL_DIR "1.0.5"
+  InstallDotNetSharedFramework $env:DOTNET_INSTALL_DIR "1.1.1"
 }
