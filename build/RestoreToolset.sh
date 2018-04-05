@@ -4,8 +4,6 @@ function InitializeDotNetCli_ProjectJson {
   local sdk_version="1.0.0-preview2-1-003177"
   local sdk_install_dir="$dotnet_root/sdk/$sdk_version"
 
-  echo "Restoring '$sdk_install_dir' ..."
-
   if [[ ! -d "$sdk_install_dir" ]]; then
     InstallDotNetSdk $dotnet_root $sdk_version
   fi
@@ -16,8 +14,6 @@ function InstallDotNetSharedFramework {
   local dotnet_root=$1
   local version=$2
   local fx_dir="$dotnet_root/shared/Microsoft.NETCore.App/$version"
-
-  echo "Restoring '$fx_dir' ..."
 
   if [[ ! -d "$fx_dir" ]]; then
     local install_script=`GetDotNetInstallScript $dotnet_root`
@@ -31,8 +27,6 @@ function InstallDotNetSharedFramework {
     fi
   fi
 }
-
-echo "Restoring custom tools..."
 
 # The following frameworks and tools are used only for testing.
 # Do not attempt to install them in source build.

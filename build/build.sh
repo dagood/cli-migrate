@@ -174,7 +174,7 @@ function InstallDotNetSdk {
 
   local install_script=`GetDotNetInstallScript $root`
 
-  bash "$install_script" --version $version
+  bash "$install_script" --version $version --install-dir $root
   local lastexitcode=$?
 
   if [[ $lastexitcode != 0 ]]; then
